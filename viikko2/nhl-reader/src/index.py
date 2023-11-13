@@ -20,11 +20,19 @@ def main():
     
     print("Players from FIN\n")
 
-    for player in players:
-        if player.nationality == "FIN":
-            print(
-                f"{player.name} team {player.team} goals {player.goals} assists {player.assists}"
-            )
+    finnish_players = [player for player in players if player.nationality == "FIN"]
+
+    sort_finnish_players = sorted(
+        finnish_players,
+        key=lambda i: i.goals + i.assists,
+        reverse=True
+    )
+
+    for player in sort_finnish_players:
+        print(
+            f"{player.name:20} {player.team} {player.goals} + {player.assists} = {player.goals + player.assists}"
+        )
+
 
 
 if __name__ == "__main__":
