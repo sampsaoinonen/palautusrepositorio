@@ -12,7 +12,7 @@ Register With Valid Username And Password
     Set Password  kalle123
     Set Password Confirmation  kalle123
     Submit Credentials 
-    Title Should Be  Welcome to Ohtu Application! 
+    Registration Should Succeed
 
 Register With Too Short Username And Valid Password
     Set Username  ka
@@ -34,6 +34,30 @@ Register With Nonmatching Password And Password Confirmation
     Set Password Confirmation  kalle123
     Submit Credentials 
     Page Should Contain  Password and Password confirmation are different
+
+Login After Successful Registration
+    Set Username  simo    
+    Set Password  simo1234
+    Set Password Confirmation  simo1234
+    Submit Credentials
+    Registration Should Succeed
+    Go To Login Page
+    Set Username  simo    
+    Set Password  simo1234
+    Submit login Credentials
+    Login Should Succeed
+
+Login After Failed Registration
+    Set Username  jepu    
+    Set Password  jepu
+    Set Password Confirmation  jepu
+    Submit Credentials
+    Registration Should Fail
+    Go To Login Page
+    Set Username  jepu  
+    Set Password  jepu
+    Submit login Credentials
+    Login Should Fail
     
 *** Keywords ***
 
@@ -51,3 +75,19 @@ Set Password Confirmation
 
 Submit Credentials
     Click Button  Register
+
+Submit login Credentials
+    Click Button  Login
+
+
+Login Should Succeed
+    Main Page Should Be Open
+
+Registration Should Succeed
+    Title Should Be  Welcome to Ohtu Application! 
+
+Registration Should Fail
+    Register Page Should Be Open
+
+Login Should Fail
+    Login Page Should Be Open
